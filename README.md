@@ -1,5 +1,7 @@
 # Railcraft Diesel
 
+[![](https://img.shields.io/travis/Axelandre42/RailcraftDiesel.svg)](https://travis-ci.com/Axelandre42/RailcraftDiesel)
+
 ## Features
 
 Railcraft Diesel is a Railcraft extension that adds a Diesel locomotive and a way to produce diesel.
