@@ -1,0 +1,15 @@
+[{
+  "modid": "railcraftdiesel",
+  "name": "Railcraft Diesel",
+  "description": "Diesel system for Railcraft.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "www.axelandre42.ovh/mods",
+  "updateJSON": "www.axelandre42.ovh/mods/versions.json",
+  "authorList": ["axelandre42"],
+  "credits": "CovertJaguar and his team for making Railcraft.",
+  "parent": "railcraft",
+  "useDependencyInformation": true,
+  "requiredMods": ["railcraft"],
+  "dependencies": ["railcraft", "thermalexpansion"]
+}]
