@@ -8,6 +8,12 @@ Railcraft Diesel is a Railcraft extension that adds a Diesel locomotive and a wa
 
 * _UPCOMING_ Diesel locomotive.
 
+## Download
+
+CurseForge: _UPCOMING_
+
+Nightly builds: [Ivy repository](http://www.axelandre42.ovh/ivy/ovh.axelandre42/railcraft-diesel)
+
 ## Contribute
 
 ### By submitting issues
