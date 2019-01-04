@@ -1,0 +1,97 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = 'http://files.minecraftforge.net/maven' }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+
+plugins {
+    id 'ivy-publish'
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+def env = System.getenv()
+
+version = '0.1.0'
+group = 'ovh.axelandre42'
+archivesBaseName = 'RailcraftDiesel'
+
+if (env.containsKey('TRAVIS') && (env.get('TRAVIS') == 'true')) {
+    version = version + '.' + env.get('TRAVIS_BUILD_NUMBER')
+}
+
+minecraft {
+    version = '1.12.2-14.23.5.2779'
+    runDir = 'run'
+    
+    mappings = 'stable_39'
+}
+
+task deobfJar(type: Jar, dependsOn: 'jar') {
+    from sourceSets.main.output
+    classifier "dev"
+}
+
+assemble.dependsOn deobfJar
+
+dependencies {
+    // Railcraft
+    implementation 'com.headlamp-games:railcraft:12.0.0-beta-2:dev'
+    
+    // Tests
+    testImplementation 'junit:junit:4.12'
+}
+
+repositories {
+	ivy {
+		url 'http://www.railcraft.info/ivy'
+	}
+	
+	maven {
+        name = "ic2"
+        url = "http://maven.ic2.player.to/"
+    }
+	
+    jcenter()
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+if (env.containsKey('FTP_USERNAME')) {
+	publishing {
+	    publications {
+	        ivy(IvyPublication) {
+	            artifact jar
+	            artifact deobfJar
+	            artifact sourceJar
+	        }
+	    }
+	    repositories {
+	        ivy {
+	            url = 'sftp://ftp.axelandre42.ovh:22/var/www/html/ivy'
+	            credentials {
+	                username env.get('FTP_USERNAME')
+	                password env.get('FTP_PASSWORD')
+	            }
+	            layout 'gradle'
+	        }
+	    }
+	}
+}
