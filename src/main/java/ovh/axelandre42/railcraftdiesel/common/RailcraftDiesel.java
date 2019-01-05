@@ -23,11 +23,48 @@
 package ovh.axelandre42.railcraftdiesel.common;
 
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 /**
  * @author Alexandre Waeles <www.axelandre42.ovh>
+ * 
  */
-@Mod(modid = "railcraftdiesel")
+@Mod(modid = "railcraftdiesel", useMetadata = true, certificateFingerprint = "040b147c3cfaf18aa82014381f847033a93f41f6")
 public class RailcraftDiesel {
+	
+	private RailcraftDieselEnvironment environment;
+	
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		RailcraftDieselEnvironment.Spec spec = new RailcraftDieselEnvironment.Spec();
+		spec.setLogger(event.getModLog());
+		spec.setConfigFile(event.getSuggestedConfigurationFile());
+		
+		this.environment = RailcraftDieselEnvironment.instance(spec);
+	}
+	
+	@EventHandler
+	public void init(FMLInitializationEvent event) {
+		
+	}
+	
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
+		
+	}
+	
+	@EventHandler
+	public void fingerprintViolation(FMLFingerprintViolationEvent event) {
+		if (event.isDirectory())
+			return;
+		
+		this.environment.logger.warn("Fingerprint violated: you\'re running and unofficial version of this mod!");
+		this.environment.unofficial = true;
+	}
+	
 	
 }
