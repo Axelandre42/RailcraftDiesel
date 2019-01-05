@@ -25,6 +25,26 @@ archivesBaseName = 'RailcraftDiesel'
 if (env.containsKey('TRAVIS') && (env.get('TRAVIS') == 'true')) {
     version = version + '.' + env.get('TRAVIS_BUILD_NUMBER')
     
+	task signMainJar(type: SignJar, dependsOn: 'reobfJar') {
+		keyStore = 'keystore.jks'
+		alias = 'signjar'
+		storePass = env.get('KEYSTORE_PASSWORD')
+		keyPass = env.get('KEYSTORE_PASSWORD')
+		
+		inputFile = jar.archivePath
+		outputFile = jar.archivePath
+	}
+	
+	task signDeobfJar(type: SignJar, dependsOn: 'deobfJar') {
+		keyStore = 'keystore.jks'
+		alias = 'signjar'
+		storePass = env.get('KEYSTORE_PASSWORD')
+		keyPass = env.get('KEYSTORE_PASSWORD')
+		
+		inputFile = deobfJar.archivePath
+		outputFile = deobfJar.archivePath
+	}
+    
     task updateVersions {
 	    doLast {
 	    	def params = '?token=' + env.get('VERSIONS_TOKEN') + '&mcversion=' + minecraft.version + '&version=' + version + '&changelog=' + URLEncoder.encode(env.get('TRAVIS_COMMIT_MESSAGE'), 'UTF-8')
