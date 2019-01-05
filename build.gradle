@@ -30,7 +30,11 @@ if (env.containsKey('TRAVIS') && (env.get('TRAVIS') == 'true')) {
     			+ '&mcversion=' + minecraft.version
     			+ '&version=' + version
     			+ '&changelog=' + env.get('TRAVIS_COMMIT_MESSAGE');
-    	def baseUrl = 'http://www.axelandre42.ovh/mods/update-versions.php' + URLEncoder.encode(params, 'UTF-8')
+    	def url = new URL('http://www.axelandre42.ovh/mods/update-versions.php' + URLEncoder.encode(params, 'UTF-8'))
+    	
+    	println 'Making GET request'
+    	
+    	url.openConnection().connect()
     }
 }
 
