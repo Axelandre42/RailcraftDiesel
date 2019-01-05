@@ -25,7 +25,7 @@ archivesBaseName = 'RailcraftDiesel'
 if (env.containsKey('TRAVIS') && (env.get('TRAVIS') == 'true')) {
     version = version + '.' + env.get('TRAVIS_BUILD_NUMBER')
     
-    task updateVersions << {
+    task updateVersions.doLast {
     	def params = '?token=' + env.get('VERSIONS_TOKEN')
     			+ '&mcversion=' + minecraft.version
     			+ '&version=' + version
