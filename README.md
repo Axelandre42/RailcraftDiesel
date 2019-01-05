@@ -1,6 +1,6 @@
 # Railcraft Diesel
 
-[![](https://img.shields.io/travis/Axelandre42/RailcraftDiesel.svg)](https://travis-ci.com/Axelandre42/RailcraftDiesel) ![](https://img.shields.io/github/license/Axelandre42/RailcraftDiesel.svg)
+[![](https://img.shields.io/travis/Axelandre42/RailcraftDiesel.svg)](https://travis-ci.org/Axelandre42/RailcraftDiesel) ![](https://img.shields.io/github/license/Axelandre42/RailcraftDiesel.svg)
 
 ## Features
 
