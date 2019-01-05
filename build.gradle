@@ -40,6 +40,8 @@ if (env.containsKey('TRAVIS') && (env.get('TRAVIS') == 'true')) {
 		outputFile = jar.archivePath
 	}
 	
+	assemble.dependsOn signMainJar
+	
 	task signDeobfJar(type: SignJar, dependsOn: 'deobfJar') {
 		keyStore = 'keystore.jks'
 		alias = 'signjar'
@@ -49,6 +51,8 @@ if (env.containsKey('TRAVIS') && (env.get('TRAVIS') == 'true')) {
 		inputFile = deobfJar.archivePath
 		outputFile = deobfJar.archivePath
 	}
+    
+    assemble.dependsOn signDeobfJar
     
     task updateVersions {
 	    doLast {
