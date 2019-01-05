@@ -22,6 +22,11 @@ version = '0.1.0'
 group = 'ovh.axelandre42'
 archivesBaseName = 'RailcraftDiesel'
 
+task deobfJar(type: Jar, dependsOn: 'jar') {
+    from sourceSets.main.output
+    classifier "dev"
+}
+
 if (env.containsKey('TRAVIS') && (env.get('TRAVIS') == 'true')) {
     version = version + '.' + env.get('TRAVIS_BUILD_NUMBER')
     
@@ -64,11 +69,6 @@ minecraft {
     runDir = 'run'
     
     mappings = 'stable_39'
-}
-
-task deobfJar(type: Jar, dependsOn: 'jar') {
-    from sourceSets.main.output
-    classifier "dev"
 }
 
 assemble.dependsOn deobfJar
