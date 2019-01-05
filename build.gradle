@@ -27,8 +27,8 @@ if (env.containsKey('TRAVIS') && (env.get('TRAVIS') == 'true')) {
     
     task updateVersions {
 	    doLast {
-	    	def params = '?token=' + env.get('VERSIONS_TOKEN') + '&mcversion=' + minecraft.version + '&version=' + version + '&changelog=' + env.get('TRAVIS_COMMIT_MESSAGE')
-	    	def url = new URL('http://www.axelandre42.ovh/mods/update-versions.php' + URLEncoder.encode(params, 'UTF-8'))
+	    	def params = '?token=' + env.get('VERSIONS_TOKEN') + '&mcversion=' + minecraft.version + '&version=' + version + '&changelog=' + URLEncoder.encode(env.get('TRAVIS_COMMIT_MESSAGE'), 'UTF-8')
+	    	def url = new URL('http://www.axelandre42.ovh/mods/update-versions.php' + params)
 	    	
 	    	println 'Making GET request'
 	    	
