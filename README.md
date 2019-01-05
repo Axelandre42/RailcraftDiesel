@@ -16,8 +16,16 @@ Nightly builds: [Ivy repository](http://www.axelandre42.ovh/ivy/ovh.axelandre42/
 
 ## Contribute
 
+Help is always nice...
+
 ### By submitting issues
+
+When you find any bug in the software please make an issue.
 
 ### By helping to write the mod
 
+First of all, please fork the repository and make pull requests. Then please work on the **issues**
+
 ## Credits
+
+Thanks to CovertJaugar for Railcraft.
