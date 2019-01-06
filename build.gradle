@@ -20,7 +20,6 @@ def env = System.getenv()
 
 version = '0.1.0'
 group = 'ovh.axelandre42'
-archivesBaseName = 'RailcraftDiesel'
 
 task deobfJar(type: Jar, dependsOn: 'jar') {
     from sourceSets.main.output
@@ -79,10 +78,10 @@ assemble.dependsOn deobfJar
 
 dependencies {
     // Railcraft
-    implementation 'com.headlamp-games:railcraft:12.0.0-beta-2:dev'
+    runtime 'com.headlamp-games:railcraft:12.0.0-beta-2:dev'
     
-    // Tests
-    testImplementation 'junit:junit:4.12'
+    // Buildcraft
+    runtime "com.mod-buildcraft:buildcraft-api:7.99.17"
 }
 
 repositories {
@@ -93,6 +92,11 @@ repositories {
 	maven {
         name = "ic2"
         url = "http://maven.ic2.player.to/"
+    }
+    
+    maven {
+        name = "buildcraft"
+        url = "https://mod-buildcraft.com/maven/"
     }
 	
     jcenter()
