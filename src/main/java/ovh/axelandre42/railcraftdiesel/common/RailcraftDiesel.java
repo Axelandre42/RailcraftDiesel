@@ -22,6 +22,14 @@
  */
 package ovh.axelandre42.railcraftdiesel.common;
 
+import org.apache.logging.log4j.Logger;
+
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IStringSerializable;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
@@ -33,18 +41,45 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
  * @author Alexandre Waeles <www.axelandre42.ovh>
  * 
  */
-@Mod(modid = "railcraftdiesel", useMetadata = true, certificateFingerprint = "040b147c3cfaf18aa82014381f847033a93f41f6")
+@Mod(modid = RailcraftDiesel.MODID,
+		useMetadata = true,
+		certificateFingerprint = "040b147c3cfaf18aa82014381f847033a93f41f6")
 public class RailcraftDiesel {
 	
-	private RailcraftDieselEnvironment environment;
+	public enum MachineType implements IStringSerializable {
+		PROSPECTOR	("prospector"),
+		OIL_RIG		("oil_rig"),
+		REFINERY	("refinery");
+
+		private String name;
+		
+		private MachineType(String name) {
+			this.name = name;
+		}
+		
+		@Override
+		public String getName() {
+			return this.name;
+		}
+	}
+	
+	public static final String MODID = "railcraftdiesel";
+	
+	public static Logger 		logger;
+	public static Configuration	config;
+	public static boolean 		unofficial = false;
+	
+	public static PropertyEnum<MachineType>	machineType	= PropertyEnum.create("machine_type", MachineType.class);
+	public static PropertyDirection			facing		= PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+	public static PropertyBool				active		= PropertyBool.create("active");
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		RailcraftDieselEnvironment.Spec spec = new RailcraftDieselEnvironment.Spec();
-		spec.setLogger(event.getModLog());
-		spec.setConfigFile(event.getSuggestedConfigurationFile());
+		logger = event.getModLog();
+		config = new Configuration(event.getSuggestedConfigurationFile());
 		
-		this.environment = RailcraftDieselEnvironment.instance(spec);
+		if (unofficial)
+			logger.warn("You're running an unofficial build. You have been warned!");
 	}
 	
 	@EventHandler
@@ -62,8 +97,7 @@ public class RailcraftDiesel {
 		if (event.isDirectory())
 			return;
 		
-		this.environment.logger.warn("Fingerprint violated: you\'re running and unofficial version of this mod!");
-		this.environment.unofficial = true;
+		unofficial = true;
 	}
 	
 	
