@@ -1,0 +1,34 @@
+{
+	"variants": {
+		"machine_type=refinery,facing=south,active=true": {
+			"model": "railcraftdiesel:machine_refinery_on"
+		},
+		"machine_type=refinery,facing=east,active=true": {
+			"model": "railcraftdiesel:machine_refinery_on",
+			"y": 1
+		},
+		"machine_type=refinery,facing=north,active=true": {
+			"model": "railcraftdiesel:machine_refinery_on",
+			"y": 2
+		},
+		"machine_type=refinery,facing=west,active=true": {
+			"model": "railcraftdiesel:machine_refinery_on",
+			"y": 3
+		},
+		"machine_type=refinery,facing=south,active=false": {
+			"model": "railcraftdiesel:machine_refinery_off"
+		},
+		"machine_type=refinery,facing=east,active=false": {
+			"model": "railcraftdiesel:machine_refinery_off",
+			"y": 1
+		},
+		"machine_type=refinery,facing=north,active=false": {
+			"model": "railcraftdiesel:machine_refinery_off",
+			"y": 2
+		},
+		"machine_type=refinery,facing=west,active=false": {
+			"model": "railcraftdiesel:machine_refinery_off",
+			"y": 3
+		}
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"parent": "block/cube",
+	"textures": {
+		"down": "railcraftdiesel:block/machine_refinery_bottom",
+		"up": "railcraftdiesel:block/machine_refinery_top",
+		"north": "railcraftdiesel:block/machine_refinery_side",
+		"south": "railcraftdiesel:block/machine_refinery_face_on",
+		"west": "railcraftdiesel:block/machine_refinery_side",
+		"east": "railcraftdiesel:block/machine_refinery_side"
+	}
+}
