@@ -4,6 +4,7 @@ env:
 install: gradle setupCIWorkspace
 script: gradle build
 deploy:
+  skip_cleanup: true
   provider: script
   script: bash scripts/deploy.sh
   on:
