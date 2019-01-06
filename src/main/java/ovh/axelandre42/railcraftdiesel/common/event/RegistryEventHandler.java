@@ -22,25 +22,36 @@
  */
 package ovh.axelandre42.railcraftdiesel.common.event;
 
-import net.minecraft.server.integrated.IntegratedServer;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 import ovh.axelandre42.railcraftdiesel.common.RailcraftDiesel;
-import ovh.axelandre42.railcraftdiesel.common.utils.PlayerUtils;
+import ovh.axelandre42.railcraftdiesel.common.block.BlockMachine;
 
 /**
  * @author Alexandre Waeles <www.axelandre42.ovh>
  *
  */
 @Mod.EventBusSubscriber
-public class ServerEventHandler {
+public class RegistryEventHandler {
+	
+	private BlockMachine blockMachine = new BlockMachine("machine");
+	private ItemBlock itemMachine = new ItemBlock(blockMachine);
 	
 	@SubscribeEvent
-	public void onPlayerJoin(PlayerLoggedInEvent event) {
-		if (RailcraftDiesel.unofficial && (event.player.getServer() instanceof IntegratedServer || PlayerUtils.isPlayerOp(event.player))) {
-			event.player.sendMessage(new TextComponentString("You're running an unofficial version of RailcraftDiesel."));
-		}
+	public void registerBlocks(RegistryEvent.Register<Block> event) {
+		RailcraftDiesel.logger.info("Registering blocks...");
+		IForgeRegistry<Block> registry = event.getRegistry();
+		registry.register(blockMachine);
+	}
+	
+	public void registerItems(RegistryEvent.Register<Item> event) {
+		RailcraftDiesel.logger.info("Registering items...");
+		IForgeRegistry<Item> registry = event.getRegistry();
+		registry.register(itemMachine);
 	}
 }
