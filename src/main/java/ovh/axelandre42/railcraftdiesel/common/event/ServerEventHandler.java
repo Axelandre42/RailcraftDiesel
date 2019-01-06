@@ -20,7 +20,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package ovh.axelandre42.railcraftdiesel.common.events;
+package ovh.axelandre42.railcraftdiesel.common.event;
 
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.util.text.TextComponentString;
